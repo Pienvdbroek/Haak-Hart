@@ -34,6 +34,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/api/my-reservations', [BorrowingController::class, 'userReservations']);
     Route::post('/borrowings', [BorrowingController::class, 'store']);
     Route::post('/borrowings/{id}/return', [BorrowingController::class, 'returnItem']);
+
+    Route::inertia('/home', 'components/magazijn/home')->name('home');
 });
 
 require __DIR__ . '/settings.php';
