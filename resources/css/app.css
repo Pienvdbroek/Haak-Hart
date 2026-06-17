@@ -1,0 +1,54 @@
+@import "@fontsource/open-sans/400.css";
+@import "@fontsource/open-sans/600.css";
+@import "@fontsource/open-sans/700.css";
+@import "@fontsource/open-sans/800.css";
+
+@import "tailwindcss";
+@import "@nuxt/ui";
+@import "tw-animate-css";
+
+@source "../views/**/*.blade.php";
+@source "../js/**/*.{vue,js,ts}";
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+@source "../../storage/framework/views/*.php";
+
+@theme static {
+    --font-sans:
+        "Open Sans", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+
+    --color-magazijn-purple: #24126E;
+    --color-magazijn-green: #25BE8C;
+    --color-magazijn-blue-gray: #AEB7D3;
+    --color-magazijn-gray: #898585;
+    --color-magazijn-white: #FBFBFF;
+    --color-magazijn-green-soft: #E7F8F2;
+    --color-magazijn-purple-soft: #E7E8F8;
+    --color-magazijn-red-soft: #FDECEC;
+    --color-magazijn-red: #BE2F25;
+    --color-magazijn-blue: #2590BE;
+}
+
+:root {
+    --ui-container: 1244px;
+    --ui-radius: 0.625rem;
+    color-scheme: light;
+}
+
+@layer base {
+    html,
+    body,
+    #app {
+        min-height: 100%;
+    }
+
+    body {
+        @apply overflow-x-hidden bg-magazijn-white font-sans text-magazijn-purple antialiased;
+    }
+
+    button,
+    input {
+        font: inherit;
+    }
+}
