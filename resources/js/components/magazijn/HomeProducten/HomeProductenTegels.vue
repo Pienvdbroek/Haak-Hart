@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import HomeProductenTegelCarouselViewer from './HomeProductenTegelCarouselViewer.vue';
 
 defineProps({

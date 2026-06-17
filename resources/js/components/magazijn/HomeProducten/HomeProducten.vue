@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import HomeProductenContents from './HomeProductenContents.vue';
 </script>
 

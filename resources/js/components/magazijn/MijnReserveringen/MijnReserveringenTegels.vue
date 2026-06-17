@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import StatusBadge from '@/components/StatusBadge.vue';
 
 const props = defineProps({

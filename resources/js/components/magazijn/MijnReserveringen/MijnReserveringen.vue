@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import MijnReserveringenContents from './MijnReserveringenContents.vue';
 </script>
 

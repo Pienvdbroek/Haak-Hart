@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { computed, ref } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import HomeProductenTegelCarouselViewer from './HomeProductenTegelCarouselViewer.vue';

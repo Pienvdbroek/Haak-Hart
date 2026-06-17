@@ -5,33 +5,41 @@ import { usePage, router } from '@inertiajs/vue3';
 const page = usePage();
 const menuOpen = ref(false);
 
-// Gebruiker uit de Inertia auth props halen
-const user = computed(() => page.props.auth.user);
+const isLoggedIn = computed(() => {
+    return !!page.props.auth?.user;
+});
+
+const user = computed(() => {
+    return page.props.auth?.user || {
+        name: 'Gast',
+        email: 'Niet ingelogd',
+    };
+});
 
 const navigation = [
     {
-        key: 'producten',
+        key: 'home-haak-hart',
+        label: 'Home',
+        icon: 'i-lucide-home',
+        href: '/home-haak-hart',
+    },
+    {
+        key: 'producten-haak-hart',
         label: 'Producten',
         icon: 'i-lucide-camera',
-        href: '/home-producten',
+        href: '/producten-haak-hart',
     },
     {
-        key: 'mijn-reserveringen',
-        label: 'Mijn Reserveringen',
-        icon: 'i-lucide-shopping-cart',
-        href: '/mijn-reserveringen',
+        key: 'donatie-haak-hart',
+        label: 'Donatie',
+        icon: 'i-lucide-heart-handshake',
+        href: '/donatie-haak-hart',
     },
     {
-        key: 'producten-beheer',
-        label: 'Producten Beheer',
-        icon: 'i-lucide-package',
-        href: '/admin-producten-beheer',
-    },
-    {
-        key: 'admin-reserveringen',
-        label: 'Alle Reserveringen',
-        icon: 'i-lucide-calendar-check',
-        href: '/admin-reserveringen',
+        key: 'contact-haak-hart',
+        label: 'Contact',
+        icon: 'i-lucide-mail',
+        href: '/contact-haak-hart',
     },
 ];
 
@@ -43,8 +51,13 @@ function isActive(item) {
     return currentPath.value === item.href;
 }
 
-function logout() {
-    router.post('/logout');
+function authAction() {
+    if (isLoggedIn.value) {
+        router.post('/logout');
+        return;
+    }
+
+    router.get('/login');
 }
 </script>
 
@@ -52,21 +65,22 @@ function logout() {
     <header class="sticky top-0 z-40 bg-magazijn-purple text-magazijn-white">
         <div class="flex h-[80px] items-center px-4 sm:px-8">
             <UButton
-                to="/home-producten"
+                to="/home-haak-hart"
                 variant="unstyled"
                 class="flex min-w-0 shrink-0 items-center gap-4 rounded-none p-0 sm:gap-5 lg:w-auto"
             >
                 <div
                     class="grid size-12 shrink-0 place-items-center rounded-full bg-magazijn-white text-magazijn-purple"
                 >
-                    <span class="text-[16px] font-extrabold tracking-[-0.18em]"
-                        >MM</span
-                    >
+                    <span class="text-[16px] font-extrabold tracking-[-0.18em]">
+                        HH
+                    </span>
                 </div>
+
                 <div
                     class="text-[26px] font-bold tracking-[0.08em] text-magazijn-white"
                 >
-                    SUMMA
+                    HAAK HART
                 </div>
             </UButton>
 
@@ -96,19 +110,21 @@ function logout() {
                     >
                         {{ user.name }}
                     </div>
+
                     <div
                         class="mt-[2px] text-[14px] font-semibold text-magazijn-blue-gray"
                     >
                         {{ user.email }}
                     </div>
                 </div>
+
                 <UButton
-                    icon="i-lucide-log-out"
+                    :icon="isLoggedIn ? 'i-lucide-log-out' : 'i-lucide-log-in'"
                     variant="ghost"
                     size="xl"
-                    aria-label="Uitloggen"
+                    :aria-label="isLoggedIn ? 'Uitloggen' : 'Inloggen'"
                     class="text-magazijn-blue-gray hover:bg-magazijn-blue-gray/15 hover:text-magazijn-white"
-                    @click="logout"
+                    @click="authAction"
                 />
             </div>
 
@@ -144,22 +160,25 @@ function logout() {
                 >
                     <span>{{ item.label }}</span>
                 </UButton>
+
                 <UButton
-                    icon="i-lucide-log-out"
+                    :icon="isLoggedIn ? 'i-lucide-log-out' : 'i-lucide-log-in'"
                     variant="ghost"
                     size="xl"
                     class="h-[48px] justify-start rounded-none px-2 text-[17px] font-semibold tracking-wide text-magazijn-blue-gray hover:bg-magazijn-blue-gray/15 hover:text-magazijn-white"
-                    @click="logout"
+                    @click="authAction"
                 >
-                    <span>Uitloggen</span>
+                    <span>{{ isLoggedIn ? 'Uitloggen' : 'Inloggen' }}</span>
                 </UButton>
             </nav>
+
             <div class="border-t border-magazijn-blue-gray/40 px-7 py-4">
                 <div
                     class="text-[17px] leading-5 font-bold tracking-wide text-magazijn-white"
                 >
                     {{ user.name }}
                 </div>
+
                 <div
                     class="mt-[2px] text-[14px] font-semibold text-magazijn-blue-gray"
                 >
