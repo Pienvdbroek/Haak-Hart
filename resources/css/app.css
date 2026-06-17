@@ -1,11 +1,11 @@
-@import "@fontsource/open-sans/400.css";
-@import "@fontsource/open-sans/600.css";
-@import "@fontsource/open-sans/700.css";
-@import "@fontsource/open-sans/800.css";
+@import '@fontsource/open-sans/400.css';
+@import '@fontsource/open-sans/600.css';
+@import '@fontsource/open-sans/700.css';
+@import '@fontsource/open-sans/800.css';
 
-@import "tailwindcss";
-@import "@nuxt/ui";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import '@nuxt/ui';
+@import 'tw-animate-css';
 
 @source "../views/**/*.blade.php";
 @source "../js/**/*.{vue,js,ts}";
@@ -14,20 +14,35 @@
 
 @theme static {
     --font-sans:
-        "Open Sans", ui-sans-serif, system-ui, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Noto Color Emoji";
+        'Open Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-roman: 'New Times Roman', serif;
+    --font-calibri: 'Calibri', sans-serif;
 
-    --color-magazijn-purple: #24126E;
-    --color-magazijn-green: #25BE8C;
-    --color-magazijn-blue-gray: #AEB7D3;
+    --color-magazijn-purple: #24126e;
+    --color-magazijn-green: #25be8c;
+    --color-magazijn-blue-gray: #aeb7d3;
     --color-magazijn-gray: #898585;
-    --color-magazijn-white: #FBFBFF;
-    --color-magazijn-green-soft: #E7F8F2;
-    --color-magazijn-purple-soft: #E7E8F8;
-    --color-magazijn-red-soft: #FDECEC;
-    --color-magazijn-red: #BE2F25;
-    --color-magazijn-blue: #2590BE;
+    --color-magazijn-white: #fbfbff;
+    --color-magazijn-green-soft: #e7f8f2;
+    --color-magazijn-purple-soft: #e7e8f8;
+    --color-magazijn-red-soft: #fdecec;
+    --color-magazijn-red: #be2f25;
+    --color-magazijn-blue: #2590be;
+
+    --color-primary-pink: #d7425b;
+    --color-primaryhover-pink: #da5369;
+    --color-menuhover-pink: #f3e1e7;
+
+    --color-background-pink: #faf8f8;
+    --color-backgroundsecondary-pink: #f9f1f3;
+    --color-backgroundfooter-pink: #f6edf0;
+
+    --color-borderstrokeline: #e4cfd6;
+
+    --color-primarytext: #341d21;
+    --color-secondarytext: #81686d;
+    --color-whitetext: #f8f2f4;
 }
 
 :root {
@@ -50,5 +65,11 @@
     button,
     input {
         font: inherit;
+    }
+    .font-timesnewroman {
+        font-family: var(--font-roman);
+    }
+    .font-calibri {
+        font-family: var(--font-calibri);
     }
 }

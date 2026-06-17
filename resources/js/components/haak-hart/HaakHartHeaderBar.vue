@@ -10,10 +10,12 @@ const isLoggedIn = computed(() => {
 });
 
 const user = computed(() => {
-    return page.props.auth?.user || {
-        name: 'Gast',
-        email: 'Niet ingelogd',
-    };
+    return (
+        page.props.auth?.user || {
+            name: 'Gast',
+            email: 'Niet ingelogd',
+        }
+    );
 });
 
 const navigation = [
@@ -59,132 +61,105 @@ function authAction() {
 
     router.get('/login');
 }
+
+const mobileOpen = ref(false);
 </script>
 
 <template>
-    <header class="sticky top-0 z-40 bg-magazijn-purple text-magazijn-white">
-        <div class="flex h-[80px] items-center px-4 sm:px-8">
-            <UButton
-                to="/home-haak-hart"
-                variant="unstyled"
-                class="flex min-w-0 shrink-0 items-center gap-4 rounded-none p-0 sm:gap-5 lg:w-auto"
-            >
-                <div
-                    class="grid size-12 shrink-0 place-items-center rounded-full bg-magazijn-white text-magazijn-purple"
-                >
-                    <span class="text-[16px] font-extrabold tracking-[-0.18em]">
-                        HH
-                    </span>
-                </div>
-
-                <div
-                    class="text-[26px] font-bold tracking-[0.08em] text-magazijn-white"
-                >
-                    HAAK HART
-                </div>
-            </UButton>
-
-            <nav class="ml-20 hidden h-full items-center gap-6 lg:flex">
-                <UButton
-                    v-for="item in navigation"
-                    :key="item.key"
-                    :to="item.href"
-                    :icon="item.icon"
-                    variant="unstyled"
-                    size="md"
-                    :class="[
-                        'h-full rounded-none px-2 text-[16px] font-semibold tracking-wide hover:text-white',
-                        isActive(item)
-                            ? 'text-magazijn-white'
-                            : 'text-magazijn-blue-gray',
-                    ]"
-                >
-                    <span class="whitespace-nowrap">{{ item.label }}</span>
-                </UButton>
-            </nav>
-
-            <div class="ml-auto hidden items-center gap-8 text-right lg:flex">
-                <div>
-                    <div
-                        class="text-[17px] leading-5 font-bold tracking-wide text-magazijn-white"
-                    >
-                        {{ user.name }}
-                    </div>
-
-                    <div
-                        class="mt-[2px] text-[14px] font-semibold text-magazijn-blue-gray"
-                    >
-                        {{ user.email }}
-                    </div>
-                </div>
-
-                <UButton
-                    :icon="isLoggedIn ? 'i-lucide-log-out' : 'i-lucide-log-in'"
-                    variant="ghost"
-                    size="xl"
-                    :aria-label="isLoggedIn ? 'Uitloggen' : 'Inloggen'"
-                    class="text-magazijn-blue-gray hover:bg-magazijn-blue-gray/15 hover:text-magazijn-white"
-                    @click="authAction"
-                />
-            </div>
-
-            <UButton
-                :icon="menuOpen ? 'i-lucide-x' : 'i-lucide-menu'"
-                variant="ghost"
-                size="xl"
-                aria-label="Menu openen"
-                class="ml-auto text-magazijn-white hover:bg-magazijn-blue-gray/15 lg:hidden"
-                @click="menuOpen = !menuOpen"
-            />
-        </div>
-
+    <div class="font-calibri">
         <div
-            v-if="menuOpen"
-            class="border-t border-magazijn-blue-gray/40 bg-magazijn-purple lg:hidden"
-        >
-            <nav class="flex flex-col gap-1 px-6 py-4">
-                <UButton
-                    v-for="item in navigation"
-                    :key="item.key"
-                    :to="item.href"
-                    :icon="item.icon"
-                    variant="ghost"
-                    size="xl"
-                    :class="[
-                        'h-[48px] justify-start rounded-none px-2 text-[17px] font-semibold tracking-wide hover:bg-magazijn-blue-gray/15',
-                        isActive(item)
-                            ? 'text-magazijn-white'
-                            : 'text-magazijn-blue-gray',
-                    ]"
-                    @click="menuOpen = false"
-                >
-                    <span>{{ item.label }}</span>
-                </UButton>
+            class="h-2 bg-gradient-to-r from-[#D7425B] via-[#F3E1E7] to-[#D7425B]"
+        ></div>
 
-                <UButton
-                    :icon="isLoggedIn ? 'i-lucide-log-out' : 'i-lucide-log-in'"
-                    variant="ghost"
-                    size="xl"
-                    class="h-[48px] justify-start rounded-none px-2 text-[17px] font-semibold tracking-wide text-magazijn-blue-gray hover:bg-magazijn-blue-gray/15 hover:text-magazijn-white"
-                    @click="authAction"
-                >
-                    <span>{{ isLoggedIn ? 'Uitloggen' : 'Inloggen' }}</span>
-                </UButton>
-            </nav>
+        <header class="relative border-b-1 border-borderstrokeline bg-white">
+            <div class="mx-auto flex h-20 max-w-7xl items-center px-8">
+                <NuxtLink to="/" class="flex items-center gap-4">
+                    <img
+                        src="/images/LogoHaakHart.svg"
+                        alt="Haak & Hart"
+                        class="h-16 w-16"
+                    />
 
-            <div class="border-t border-magazijn-blue-gray/40 px-7 py-4">
-                <div
-                    class="text-[17px] leading-5 font-bold tracking-wide text-magazijn-white"
-                >
-                    {{ user.name }}
+                    <div>
+                        <h1 class="text-2xl font-semibold text-primarytext">
+                            Haak & Hart
+                        </h1>
+                        <p class="text-sm text-secondarytext">
+                            Met liefde gehaakt
+                        </p>
+                    </div>
+                </NuxtLink>
+
+                <div class="relative mx-auto hidden lg:block">
+                    <nav class="relative flex items-center">
+                        <div class="relative flex items-center gap-2">
+                            <NuxtLink
+                                v-for="item in navigation"
+                                :key="item.href"
+                                :to="item.href"
+                                :class="[
+                                    'rounded-md px-6 py-3 text-lg font-medium tracking-wide text-primarytext transition-all duration-200',
+                                    isActive(item.href)
+                                        ? 'bg-color-primary-pink text-primarytext shadow-md'
+                                        : 'text-foreground hover:bg-menuhover-pink hover:text-primarytext',
+                                ]"
+                            >
+                                {{ item.label }}
+                            </NuxtLink>
+                        </div>
+                    </nav>
                 </div>
 
-                <div
-                    class="mt-[2px] text-[14px] font-semibold text-magazijn-blue-gray"
+                <NuxtLink
+                    to="/login"
+                    class="hidden items-center gap-2 rounded-md bg-primary-pink px-6 py-2 text-lg font-semibold text-white shadow-md hover:bg-primaryhover-pink lg:flex"
                 >
-                    {{ user.email }}
-                </div>
+                    <UIcon name="i-lucide-heart" class="h-5 w-5" />
+                    <span>Aanmelden</span>
+                </NuxtLink>
+
+                <!-- Mobile-->
+                <button
+                    class="ml-auto flex items-center justify-center lg:hidden"
+                    @click="mobileOpen = !mobileOpen"
+                >
+                    <UIcon
+                        name="i-lucide-menu"
+                        class="h-7 w-7 text-primarytext"
+                    />
+                </button>
             </div>
-        </div>
-    </header>
+
+            <div
+                v-if="mobileOpen"
+                class="border-t border-borderstrokeline bg-white shadow-sm lg:hidden"
+            >
+                <nav class="flex flex-col gap-2 p-4">
+                    <NuxtLink
+                        v-for="item in navigation"
+                        :key="item.href"
+                        :to="item.href"
+                        @click="mobileOpen = false"
+                        :class="[
+                            'rounded-md px-4 py-3 font-semibold text-primarytext transition-all',
+                            isActive(item.href)
+                                ? 'bg-color-primary-pink text-primarytext'
+                                : 'hover:bg-menuhover-pink hover:text-primarytext',
+                        ]"
+                    >
+                        {{ item.label }}
+                    </NuxtLink>
+
+                    <NuxtLink
+                        to="/login"
+                        @click="mobileOpen = false"
+                        class="mt-2 flex items-center justify-center gap-2 rounded-md bg-primary-pink px-4 py-3 font-semibold text-white hover:bg-primaryhover-pink"
+                    >
+                        <UIcon name="i-lucide-heart" class="h-5 w-5" />
+                        Aanmelden
+                    </NuxtLink>
+                </nav>
+            </div>
+        </header>
+    </div>
 </template>
