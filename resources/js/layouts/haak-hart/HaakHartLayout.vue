@@ -3,14 +3,11 @@ import HaakHartHeaderBar from '@/components/haak-hart/HaakHartHeaderBar.vue';
 </script>
 
 <template>
-    <div class="min-h-screen bg-backgroundprimary">
+    <div class="min-h-screen bg-gradient-to-b from-[#F9F1F3] to-[#FAF8F8]">
         <HaakHartHeaderBar />
 
-    <div class="h-[120vh] bg-gradient-to-b from-[#F9F1F3] to-[#FAF8F8]">
-
-        <main class=" ">
+        <main class="mx-auto max-w-7xl px-8 py-10">
             <slot />
         </main>
-        </div>
     </div>
 </template>

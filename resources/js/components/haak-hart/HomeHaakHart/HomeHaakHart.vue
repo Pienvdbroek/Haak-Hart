@@ -4,15 +4,26 @@ import HaakHartLayout from '@/layouts/haak-hart/HaakHartLayout.vue';
 defineOptions({
     layout: HaakHartLayout,
 });
-
-const page = {
-    title: 'Haak-Hart',
-    description: 'Welkom op de Haak-Hart homepagina.',
-};
 </script>
 
 <template>
-    <div class="mx-auto">
+
+    <div class="break-words">
         jdskljfaskljmnvdshnvjkdsnvkjdsbnvjkndfkjbvjdkfbvjkdbfvkjdbfjvkdfnjkhskjdfkldsjfkldsjfklsjfskldjdskljfaskljmnvdshnvjkdsnvkjdsbnvjkndfkjbvjdkfbvjkdbfvkjdbfjvkdfnjkhskjdfkldsjfkldsjfklsjfskld
     </div>
+
+    <section class="max-w-3xl">
+        <h2 class="text-3xl font-semibold text-primarytext">
+            YESSSS
+        </h2>
+
+        <p class="mt-4 text-lg leading-8 text-secondarytext">
+            YUPPP
+        </p>
+
+        <p class="mt-6 break-words text-primarytext">
+            jdskljfaskljmnvdshnvjkdsnvkjdsbnvjkndfkjbvjdkfbvjkdbfvkjdbfjvkdfnjkhskjdfkldsjfkldsjfklsjfskldjdskljfaskljmnvdshnvjkdsnvkjdsbnvjkndfkjbvjdkfbvjkdbfvkjdbfjvkdfnjkhskjdfkldsjfkldsjfklsjfskld
+        </p>
+    </section>
 </template>
+
