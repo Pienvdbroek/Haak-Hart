@@ -34,7 +34,7 @@
     --color-primaryhover-pink: #da5369;
     --color-menuhover-pink: #f3e1e7;
 
-    --color-background-pink: #faf8f8;
+    --color-backgroundprimary: #faf8f8;
     --color-backgroundsecondary-pink: #f9f1f3;
     --color-backgroundfooter-pink: #f6edf0;
 
@@ -46,7 +46,7 @@
 }
 
 :root {
-    --ui-container: 1244px;
+    
     --ui-radius: 0.625rem;
     color-scheme: light;
 }
