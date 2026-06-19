@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Hand, Shirt } from 'lucide-vue-next';
+
 import HaakHartLayout from '@/layouts/haak-hart/HaakHartLayout.vue';
 
 defineOptions({
@@ -23,8 +25,6 @@ const examples = [
         image: '/images/sokken.png',
     },
 ];
-
-import { Shirt, Hand } from 'lucide-vue-next';
 
 const accepted = [
     {
@@ -79,18 +79,20 @@ const accepted = [
                     </p>
 
                     <div class="mt-8 flex gap-4">
-                        <NuxtLink
+                        <ULink
+                            to="/donatie-haak-hart"
                             class="hidden items-center gap-2 rounded-md bg-primary-pink px-10 py-2 text-lg font-semibold text-white shadow-md hover:bg-primaryhover-pink lg:flex"
                         >
                             <UIcon name="i-lucide-heart" class="h-5 w-5" />
                             <span>Doneer nu</span>
-                        </NuxtLink>
-                        <NuxtLink
-                            to="/ProductenHaakHart"
-                            class="hidden items-center gap-2 rounded-md border-2 border-borderstrokeline bg-backgroundfooter-pink px-10 py-2 text-lg font-semibold text-primarytext shadow-md hover:bg-menuhover-pink lg:flex"
+                        </ULink>
+
+                        <ULink
+                            to="/producten-haak-hart"
+                            class="hidden items-center gap-2 rounded-md border-2 border-borderstrokeline bg-backgroundfooter-pink px-10 py-2 text-lg font-semibold text-primarytext shadow-md hover:bg-menuhover-pink hover:text-primarytext lg:flex"
                         >
                             <span>Bekijk producten</span>
-                        </NuxtLink>
+                        </ULink>
                     </div>
                 </div>
 
@@ -155,6 +157,7 @@ const accepted = [
                     We nemen de volgende handgemaakte items aan, nieuw of in
                     goede staat.
                 </p>
+
                 <div class="mt-10 flex flex-wrap justify-center gap-6">
                     <div
                         v-for="item in accepted"
@@ -272,12 +275,13 @@ const accepted = [
                         </div>
                     </div>
 
-                    <NuxtLink
+                    <ULink
+                        to="/donatie-haak-hart"
                         class="mt-8 hidden w-50 items-center gap-2 rounded-md bg-primary-pink px-10 py-2 text-lg font-semibold text-white shadow-md hover:bg-primaryhover-pink lg:flex"
                     >
                         <UIcon name="i-lucide-heart" class="h-5 w-5" />
                         <span>Doneer nu</span>
-                    </NuxtLink>
+                    </ULink>
                 </div>
             </div>
         </section>

@@ -1,24 +1,22 @@
 <script setup lang="ts">
+import { router, usePage } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
-import { usePage, router } from '@inertiajs/vue3';
+
+type NavigationItem = {
+    key: string;
+    label: string;
+    icon: string;
+    href: string;
+};
 
 const page = usePage();
-const menuOpen = ref(false);
+const mobileOpen = ref(false);
 
 const isLoggedIn = computed(() => {
     return !!page.props.auth?.user;
 });
 
-const user = computed(() => {
-    return (
-        page.props.auth?.user || {
-            name: 'Gast',
-            email: 'Niet ingelogd',
-        }
-    );
-});
-
-const navigation = [
+const navigation: NavigationItem[] = [
     {
         key: 'home-haak-hart',
         label: 'Home',
@@ -49,20 +47,21 @@ const currentPath = computed(() => {
     return (page.url || '').split('?')[0].replace(/\/$/, '') || '/';
 });
 
-function isActive(item) {
+function isActive(item: NavigationItem) {
     return currentPath.value === item.href;
 }
 
 function authAction() {
+    mobileOpen.value = false;
+
     if (isLoggedIn.value) {
         router.post('/logout');
+
         return;
     }
 
     router.get('/login');
 }
-
-const mobileOpen = ref(false);
 </script>
 
 <template>
@@ -73,7 +72,7 @@ const mobileOpen = ref(false);
 
         <header class="relative border-b-1 border-borderstrokeline bg-white">
             <div class="mx-auto flex h-20 max-w-7xl items-center px-8">
-                <NuxtLink to="/" class="flex items-center gap-4">
+                <ULink to="/home-haak-hart" class="flex items-center gap-4">
                     <img
                         src="/images/LogoHaakHart.svg"
                         alt="Haak & Hart"
@@ -88,43 +87,45 @@ const mobileOpen = ref(false);
                             Met liefde gehaakt
                         </p>
                     </div>
-                </NuxtLink>
+                </ULink>
 
                 <div class="relative mx-auto hidden lg:block">
                     <nav class="relative flex items-center">
                         <div class="relative flex items-center gap-2">
-                            <NuxtLink
+                            <ULink
                                 v-for="item in navigation"
-                                :key="item.href"
+                                :key="item.key"
                                 :to="item.href"
                                 :class="[
-                                    'rounded-md px-6 py-3 text-lg font-medium tracking-wide text-primarytext transition-all duration-200',
-                                    isActive(item.href)
-                                        ? 'bg-color-primary-pink text-primarytext shadow-md'
-                                        : 'text-foreground hover:bg-menuhover-pink hover:text-primarytext',
+                                    'rounded-md px-6 py-3 text-lg font-medium tracking-wide transition-all duration-200',
+                                    isActive(item)
+                                        ? 'bg-primary-pink text-white shadow-md hover:text-white'
+                                        : 'text-primarytext hover:bg-menuhover-pink hover:text-primarytext',
                                 ]"
                             >
                                 {{ item.label }}
-                            </NuxtLink>
+                            </ULink>
                         </div>
                     </nav>
                 </div>
 
-                <NuxtLink
-                    to="/login"
+                <button
+                    type="button"
                     class="hidden items-center gap-2 rounded-md bg-primary-pink px-6 py-2 text-lg font-semibold text-white shadow-md hover:bg-primaryhover-pink lg:flex"
+                    @click="authAction"
                 >
                     <UIcon name="i-lucide-heart" class="h-5 w-5" />
-                    <span>Aanmelden</span>
-                </NuxtLink>
+                    <span>{{ isLoggedIn ? 'Uitloggen' : 'Aanmelden' }}</span>
+                </button>
 
                 <!-- Mobile-->
                 <button
+                    type="button"
                     class="ml-auto flex items-center justify-center lg:hidden"
                     @click="mobileOpen = !mobileOpen"
                 >
                     <UIcon
-                        name="i-lucide-menu"
+                        :name="mobileOpen ? 'i-lucide-x' : 'i-lucide-menu'"
                         class="h-7 w-7 text-primarytext"
                     />
                 </button>
@@ -135,29 +136,31 @@ const mobileOpen = ref(false);
                 class="border-t border-borderstrokeline bg-white shadow-sm lg:hidden"
             >
                 <nav class="flex flex-col gap-2 p-4">
-                    <NuxtLink
+                    <ULink
                         v-for="item in navigation"
-                        :key="item.href"
+                        :key="item.key"
                         :to="item.href"
                         @click="mobileOpen = false"
                         :class="[
                             'rounded-md px-4 py-3 font-semibold text-primarytext transition-all',
-                            isActive(item.href)
-                                ? 'bg-color-primary-pink text-primarytext'
+                            isActive(item)
+                                ? 'bg-primary-pink text-white hover:text-white'
                                 : 'hover:bg-menuhover-pink hover:text-primarytext',
                         ]"
                     >
                         {{ item.label }}
-                    </NuxtLink>
+                    </ULink>
 
-                    <NuxtLink
-                        to="/login"
-                        @click="mobileOpen = false"
+                    <button
+                        type="button"
                         class="mt-2 flex items-center justify-center gap-2 rounded-md bg-primary-pink px-4 py-3 font-semibold text-white hover:bg-primaryhover-pink"
+                        @click="authAction"
                     >
                         <UIcon name="i-lucide-heart" class="h-5 w-5" />
-                        Aanmelden
-                    </NuxtLink>
+                        <span>{{
+                            isLoggedIn ? 'Uitloggen' : 'Aanmelden'
+                        }}</span>
+                    </button>
                 </nav>
             </div>
         </header>
