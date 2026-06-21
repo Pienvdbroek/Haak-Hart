@@ -53,7 +53,6 @@ const accepted = [
 <template>
     <div class="">
         <div class="mx-auto max-w-7xl py-10">
-            <!-- HERO -->
             <section class="grid items-center gap-10 lg:grid-cols-2">
                 <div>
                     <span
@@ -105,7 +104,6 @@ const accepted = [
                 </div>
             </section>
 
-            <!-- VOORBEELDEN -->
             <section class="mt-40 text-center">
                 <p
                     class="text-sm font-semibold tracking-widest text-primary-pink uppercase"
@@ -145,7 +143,6 @@ const accepted = [
                 </div>
             </section>
 
-            <!-- ACCEPTEREN -->
             <section class="mt-28 text-center">
                 <h2
                     class="font-timesnewroman text-5xl font-bold text-primarytext"
@@ -183,7 +180,6 @@ const accepted = [
             </section>
         </div>
 
-        <!-- DONATIE BLOK -->
         <section class="mt-24 bg-backgroundsecondary-pink py-20">
             <div class="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2">
                 <img
