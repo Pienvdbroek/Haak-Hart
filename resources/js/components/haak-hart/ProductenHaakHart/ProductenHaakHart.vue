@@ -8,5 +8,5 @@ defineOptions({
 </script>
 
 <template>
-    <HomeProductenContents />
+
 </template>

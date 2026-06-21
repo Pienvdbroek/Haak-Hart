@@ -46,8 +46,16 @@
 }
 
 :root {
-    
     --ui-radius: 0.625rem;
+
+    --cursor-pienswurmmmm-default:
+        url('/public/images/pienswurmmmm.cur'),
+        auto;
+
+    --cursor-pienswurmmmm-pointer:
+        url('/public/images/pienswurmmmm.cur'),
+        pointer;
+
     color-scheme: light;
 }
 
@@ -62,13 +70,51 @@
         @apply overflow-x-hidden bg-magazijn-white font-sans text-magazijn-purple antialiased;
     }
 
+    *,
+    *::before,
+    *::after {
+        cursor: var(--cursor-pienswurmmmm-default) !important;
+    }
+
+    :where(
+        a,
+        button,
+        [role='button'],
+        input[type='button'],
+        input[type='submit'],
+        input[type='reset'],
+        select,
+        summary
+    ) {
+        cursor: var(--cursor-pienswurmmmm-pointer) !important;
+    }
+
+    :where(
+        input[type='text'],
+        input[type='email'],
+        input[type='password'],
+        input[type='search'],
+        input[type='number'],
+        input[type='tel'],
+        input[type='url'],
+        textarea,
+        [contenteditable='true']
+    ) {
+        cursor: var(--cursor-pienswurmmmm-default) !important;
+        caret-color: var(--color-primary-pink);
+    }
+
     button,
-    input {
+    input,
+    textarea,
+    select {
         font: inherit;
     }
+
     .font-timesnewroman {
         font-family: var(--font-roman);
     }
+
     .font-calibri {
         font-family: var(--font-calibri);
     }
