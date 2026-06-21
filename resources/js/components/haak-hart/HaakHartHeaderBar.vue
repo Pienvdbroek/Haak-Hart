@@ -80,7 +80,7 @@ function authAction() {
                     />
 
                     <div>
-                        <h1 class="text-2xl font-semibold text-primarytext">
+                        <h1 class="text-2xl font-semibold text-primarytext font-timesnewroman">
                             Haak & Hart
                         </h1>
                         <p class="text-sm text-secondarytext">

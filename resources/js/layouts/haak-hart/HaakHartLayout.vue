@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import HaakHartFooter from '@/components/haak-hart/HaakHartFooter.vue';
 import HaakHartHeaderBar from '@/components/haak-hart/HaakHartHeaderBar.vue';
 </script>
 
@@ -8,6 +9,9 @@ import HaakHartHeaderBar from '@/components/haak-hart/HaakHartHeaderBar.vue';
 
         <main class="mx-auto max-w-7xl px-8 py-10">
             <slot />
-        </main>
-    </div>
+        </main>    
+        </div>
+        <HaakHartFooter />
+
 </template>
+
