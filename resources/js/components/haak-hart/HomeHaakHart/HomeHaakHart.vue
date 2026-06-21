@@ -53,7 +53,7 @@ const accepted = [
 <template>
     <div class="">
         <div class="mx-auto max-w-7xl py-10">
-            <section class="grid items-center gap-10 lg:grid-cols-2">
+            <section class="grid items-center gap-10 md:grid-cols-2">
                 <div>
                     <span
                         class="text-sm font-semibold tracking-widest text-primary-pink uppercase"
@@ -62,7 +62,7 @@ const accepted = [
                     </span>
 
                     <h1
-                        class="font-timesnewroman mt-2 text-7xl leading-tight font-bold text-primarytext"
+                        class="font-timesnewroman mt-2 text-4xl leading-tight font-bold text-primarytext sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl"
                     >
                         Met liefde
                         <span class="text-primary-pink italic"> gehaakt </span>
@@ -77,10 +77,10 @@ const accepted = [
                         Van truien tot sjaals, van mutsen tot sokken.
                     </p>
 
-                    <div class="mt-8 flex gap-4">
+                    <div class="mt-8 flex flex-wrap gap-4">
                         <ULink
                             to="/donatie-haak-hart"
-                            class="hidden items-center gap-2 rounded-md bg-primary-pink px-10 py-2 text-lg font-semibold text-white shadow-md hover:bg-primaryhover-pink lg:flex"
+                            class="flex items-center gap-2 rounded-md bg-primary-pink px-10 py-2 text-lg font-semibold text-white shadow-md hover:bg-primaryhover-pink"
                         >
                             <UIcon name="i-lucide-heart" class="h-5 w-5" />
                             <span>Doneer nu</span>
@@ -88,7 +88,7 @@ const accepted = [
 
                         <ULink
                             to="/producten-haak-hart"
-                            class="hidden items-center gap-2 rounded-md border-2 border-borderstrokeline bg-backgroundfooter-pink px-10 py-2 text-lg font-semibold text-primarytext shadow-md hover:bg-menuhover-pink hover:text-primarytext lg:flex"
+                            class="flex items-center gap-2 rounded-md border-2 border-borderstrokeline bg-backgroundfooter-pink px-10 py-2 text-lg font-semibold text-primarytext shadow-md hover:bg-menuhover-pink hover:text-primarytext"
                         >
                             <span>Bekijk producten</span>
                         </ULink>
@@ -99,7 +99,7 @@ const accepted = [
                     <img
                         src="/images/homeimg.png"
                         alt=""
-                        class="aspect-square w-full max-w-lg rounded-xl object-cover shadow-lg"
+                        class="w-full rounded-xl object-cover shadow-lg lg:max-w-lg"
                     />
                 </div>
             </section>
@@ -122,7 +122,9 @@ const accepted = [
                     onze collectie en laat je inspireren.
                 </p>
 
-                <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                <div
+                    class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+                >
                     <div
                         v-for="item in examples"
                         :key="item.title"
@@ -185,7 +187,7 @@ const accepted = [
                 <img
                     src="/images/oma.png"
                     alt=""
-                    class="rounded-xl shadow-lg"
+                    class="h-auto w-full rounded-xl object-cover shadow-lg sm:h-160 lg:aspect-square lg:h-auto"
                 />
 
                 <div>
@@ -210,7 +212,9 @@ const accepted = [
                     </p>
 
                     <div class="mt-8 grid gap-4 sm:grid-cols-2">
-                        <div class="rounded-xl border bg-white p-5">
+                        <div
+                            class="rounded-xl border-2 border-borderstrokeline bg-white p-5"
+                        >
                             <UIcon
                                 name="i-lucide-heart"
                                 class="h-5 w-5 text-primary-pink"
@@ -225,7 +229,9 @@ const accepted = [
                             </p>
                         </div>
 
-                        <div class="rounded-xl border bg-white p-5">
+                        <div
+                            class="rounded-xl border-2 border-borderstrokeline bg-white p-5"
+                        >
                             <UIcon
                                 name="i-lucide-heart"
                                 class="h-5 w-5 text-primary-pink"
@@ -240,7 +246,9 @@ const accepted = [
                             </p>
                         </div>
 
-                        <div class="rounded-xl border bg-white p-5">
+                        <div
+                            class="rounded-xl border-2 border-borderstrokeline bg-white p-5"
+                        >
                             <UIcon
                                 name="i-lucide-heart"
                                 class="h-5 w-5 text-primary-pink"
@@ -255,7 +263,9 @@ const accepted = [
                             </p>
                         </div>
 
-                        <div class="rounded-xl border bg-white p-5">
+                        <div
+                            class="rounded-xl border-2 border-borderstrokeline bg-white p-5"
+                        >
                             <UIcon
                                 name="i-lucide-heart"
                                 class="h-5 w-5 text-primary-pink"
@@ -273,7 +283,7 @@ const accepted = [
 
                     <ULink
                         to="/donatie-haak-hart"
-                        class="mt-8 hidden w-50 items-center gap-2 rounded-md bg-primary-pink px-10 py-2 text-lg font-semibold text-white shadow-md hover:bg-primaryhover-pink lg:flex"
+                        class="mt-8 flex w-50 items-center gap-2 rounded-md bg-primary-pink px-10 py-2 text-lg font-semibold text-white shadow-md hover:bg-primaryhover-pink"
                     >
                         <UIcon name="i-lucide-heart" class="h-5 w-5" />
                         <span>Doneer nu</span>
