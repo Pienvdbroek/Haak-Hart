@@ -51,8 +51,8 @@ const accepted = [
 </script>
 
 <template>
-    <div class="">
-        <div class="mx-auto max-w-7xl py-10">
+    <div class="mx-auto max-w-7xl pt-10">
+        <div class="px-8 py-10">
             <section class="grid items-center gap-10 md:grid-cols-2">
                 <div>
                     <span
@@ -182,7 +182,9 @@ const accepted = [
             </section>
         </div>
 
-        <section class="mt-24 bg-backgroundsecondary-pink py-20">
+        
+    </div>
+    <section class="mt-24 bg-backgroundsecondary-pink py-20">
             <div class="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2">
                 <img
                     src="/images/oma.png"
@@ -291,5 +293,4 @@ const accepted = [
                 </div>
             </div>
         </section>
-    </div>
 </template>
