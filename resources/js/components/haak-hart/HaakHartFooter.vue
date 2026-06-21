@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 type NavigationItem = {
     key: string;
     label: string;
@@ -19,11 +18,10 @@ const navigation: NavigationItem[] = [
 </script>
 
 <template>
-    <footer class="border-t border-borderstrokeline bg-[#F9F1F4]">
+    <footer class="border-t border-borderstrokeline bg-backgroundfooter-pink">
         <div
             class="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-8 py-12 md:grid-cols-3"
         >
-            <!-- Brand -->
             <div class="mr-0 md:mr-10">
                 <div class="flex items-center gap-4">
                     <img
@@ -32,7 +30,9 @@ const navigation: NavigationItem[] = [
                         class="h-14 w-14"
                     />
                     <div>
-                          <h1 class="text-2xl font-semibold text-primarytext font-timesnewroman">
+                        <h1
+                            class="font-timesnewroman text-2xl font-semibold text-primarytext"
+                        >
                             Haak & Hart
                         </h1>
                         <p class="text-sm text-secondarytext">
@@ -47,9 +47,10 @@ const navigation: NavigationItem[] = [
                 </p>
             </div>
 
-            <!-- Snelle links -->
             <div>
-                <h3 class="mb-4 text-lg font-semibold text-primarytext">
+                <h3
+                    class="font-timesnewroman mb-4 text-xl font-semibold text-primarytext"
+                >
                     Snelle links
                 </h3>
 
@@ -65,9 +66,10 @@ const navigation: NavigationItem[] = [
                 </ul>
             </div>
 
-            <!-- Contact -->
             <div>
-                <h3 class="mb-4 text-lg font-semibold text-primarytext">
+                <h3
+                    class="font-timesnewroman mb-4 text-xl font-semibold text-primarytext"
+                >
                     Contact
                 </h3>
 
@@ -87,10 +89,9 @@ const navigation: NavigationItem[] = [
             </div>
         </div>
 
-        <!-- Bottom bar -->
-        <div class="border-t border-borderstrokeline py-6 mx-6">
+        <div class="mx-6 border-t border-borderstrokeline py-6">
             <div
-                class="mx-auto flex max-w-7xl flex-col items-center text-center justify-between gap-2 px-8 text-xs text-secondarytext md:flex-row"
+                class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-8 text-center text-xs text-secondarytext md:flex-row"
             >
                 <p>© 2026 Haak & Hart. Alle rechten voorbehouden.</p>
                 <p>Gemaakt met ❤️ en garen</p>
