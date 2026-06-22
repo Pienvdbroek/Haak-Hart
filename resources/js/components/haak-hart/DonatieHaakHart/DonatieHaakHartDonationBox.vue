@@ -74,7 +74,7 @@
                     min-[480px]:w-[20%]
 
                     sm:top-[28%]
-                    sm:left-[3.2%]
+                    sm:left-[1%]
                     sm:w-[18%]
 
                     md:top-[28%]
@@ -193,7 +193,7 @@
                     rounded-2xl
                     border
                     border-borderstrokeline
-                    bg-white
+                    bg-backgroundprimary
                     p-4
                     shadow-sm
 

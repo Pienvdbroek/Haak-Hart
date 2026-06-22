@@ -54,7 +54,7 @@ const fieldUi = {
 };
 
 const inputUi = {
-    base: 'h-12 rounded-md bg-white px-4 py-3 text-base text-primarytext ring-1 ring-borderstrokeline placeholder:text-secondarytext outline-none transition focus-visible:ring-2 focus-visible:ring-primary-pink dark:bg-white dark:text-primarytext dark:ring-borderstrokeline dark:placeholder:text-secondarytext',
+    base: 'h-12 rounded-md bg-backgroundprimary px-4 py-3 text-base text-primarytext ring-1 ring-borderstrokeline placeholder:text-secondarytext outline-none transition focus-visible:ring-2 focus-visible:ring-primary-pink dark:bg-backgroundprimary dark:text-primarytext dark:ring-borderstrokeline dark:placeholder:text-secondarytext',
 };
 
 watch(
@@ -87,14 +87,14 @@ function onSubmit() {
         <template #content>
             <div
                 v-if="props.product"
-                class="relative rounded-2xl border border-borderstrokeline bg-white p-8 shadow-xl"
+                class="relative rounded-2xl border border-borderstrokeline bg-backgroundprimary p-8 shadow-xl"
             >
                 <UButton
                     icon="i-lucide-x"
                     color="neutral"
                     variant="ghost"
                     aria-label="Sluiten"
-                    class="absolute top-5 right-5 z-10 h-9 w-9 justify-center rounded-full bg-primary-pink p-0 text-white transition-all duration-200 hover:bg-primaryhover-pink hover:text-white active:bg-primary-pink"
+                    class="absolute top-5 right-5 z-10 h-9 w-9 justify-center rounded-full bg-primary-pink p-0 text-whitetext transition-all duration-200 hover:bg-primaryhover-pink hover:text-whitetext active:bg-primary-pink"
                     @click="modalOpen = false"
                 />
 
@@ -156,7 +156,7 @@ function onSubmit() {
                         <ProductenHaakHartImageTile
                             :image="props.product.image"
                             :alt="props.product.title"
-                            class=" w-full rounded-2xl shadow-md"
+                            class="w-full rounded-2xl shadow-md"
                         />
                     </div>
 
@@ -217,7 +217,7 @@ function onSubmit() {
                         icon="i-lucide-shopping-cart"
                         color="neutral"
                         variant="ghost"
-                        class="mt-1 w-full justify-center gap-2 rounded-md bg-primary-pink px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-primaryhover-pink hover:text-white active:bg-primary-pink"
+                        class="mt-1 w-full justify-center gap-2 rounded-md bg-primary-pink px-6 py-3 font-semibold text-whitetext shadow-md transition-all duration-200 hover:bg-primaryhover-pink hover:text-whitetext active:bg-primary-pink"
                     />
                 </UForm>
             </div>

@@ -124,8 +124,8 @@ function openProductModal(product: Product) {
                 class="min-w-36 justify-center rounded-xl font-medium shadow-none transition-all duration-200"
                 :class="
                     category === activeCategory
-                        ? 'border border-primary-pink bg-primary-pink text-white hover:bg-primaryhover-pink hover:text-white active:bg-primary-pink'
-                        : 'border border-borderstrokeline bg-white text-primarytext hover:bg-menuhover-pink hover:text-primarytext active:bg-menuhover-pink'
+                        ? 'border border-primary-pink bg-primary-pink text-whitetext hover:bg-primaryhover-pink hover:text-whitetext active:bg-primary-pink'
+                        : 'border border-borderstrokeline bg-backgroundprimary text-primarytext hover:bg-menuhover-pink hover:text-primarytext active:bg-menuhover-pink'
                 "
                 @click="activeCategory = category"
             />
@@ -147,18 +147,18 @@ function openProductModal(product: Product) {
                         color="neutral"
                         variant="ghost"
                         :aria-label="`${product.title} toevoegen aan winkelwagen`"
-                        class="absolute top-5 right-5 h-9 w-20 justify-center rounded-xl bg-primary-pink p-0 text-white transition-all duration-200 hover:bg-primaryhover-pink hover:text-white active:bg-primary-pink"
+                        class="absolute top-5 right-5 h-9 w-20 justify-center rounded-xl bg-primary-pink p-0 text-whitetext transition-all duration-200 hover:bg-primaryhover-pink hover:text-whitetext active:bg-primary-pink"
                         @click.stop="openProductModal(product)"
                     />
 
                     <UBadge
                         :label="product.title"
-                        class="font-timesnewroman absolute bottom-16 left-5 h-9 w-fit max-w-[calc(100%-2.5rem)] justify-start rounded-full bg-white px-4 text-left text-base font-bold text-primarytext shadow-sm"
+                        class="font-timesnewroman absolute bottom-16 left-5 h-9 w-fit max-w-[calc(100%-2.5rem)] justify-start rounded-full bg-backgroundprimary px-4 text-left text-base font-bold text-primarytext shadow-sm"
                     />
 
                     <UBadge
                         :label="product.price"
-                        class="font-timesnewroman absolute right-5 bottom-5 h-9 w-20 justify-center rounded-xl bg-primary-pink px-0 text-sm font-semibold text-white"
+                        class="font-timesnewroman absolute right-5 bottom-5 h-9 w-20 justify-center rounded-xl bg-primary-pink px-0 text-sm font-semibold text-whitetext"
                     />
                 </ProductenHaakHartImageTile>
             </UPageCard>
