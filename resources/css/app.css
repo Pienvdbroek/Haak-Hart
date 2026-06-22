@@ -49,11 +49,11 @@
     --ui-radius: 0.625rem;
 
     --cursor-pienswurmmmm-default:
-        url('/public/images/pienswurmmmm.cur'),
+        url('/public/images/wurm/pienswurmmmm-cursor-128x.cur'),
         auto;
 
     --cursor-pienswurmmmm-pointer:
-        url('/public/images/pienswurmmmm.cur'),
+        url('/public/images/wurm/pienswurmmmm-cursor-128x.cur'),
         pointer;
 
     color-scheme: light;

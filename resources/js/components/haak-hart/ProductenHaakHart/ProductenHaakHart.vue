@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import ProductenHaakHartContents from '@/components/haak-hart/ProductenHaakHart/ProductenHaakHartContents.vue';
 import HaakHartLayout from '@/layouts/haak-hart/HaakHartLayout.vue';
-import HomeProductenContents from '@/components/magazijn/HomeProducten/HomeProductenContents.vue';
 
 defineOptions({
     layout: HaakHartLayout,
@@ -8,5 +8,7 @@ defineOptions({
 </script>
 
 <template>
-
+    <UContainer class="max-w-7xl py-8">
+        <ProductenHaakHartContents />
+    </UContainer>
 </template>
