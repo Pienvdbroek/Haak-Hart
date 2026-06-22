@@ -7,7 +7,7 @@ defineOptions({
 </script>
 
 <template>
-    <div class="mx-auto max-w-7xl py-16">
+    <div class="mx-8 max-w-7xl py-12">
         <section class="text-center">
             <p
                 class="text-sm font-semibold tracking-widest text-primary-pink uppercase"
