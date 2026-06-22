@@ -46,17 +46,15 @@ const state = reactive<CheckoutForm>({
 });
 
 const modalUi = {
-    content:
-        'w-[min(94vw,460px)] max-w-none bg-transparent p-0 shadow-none ring-0',
+    content: 'w-[min(94vw,520px)] max-w-none bg-transparent p-0 shadow-none ring-0',
 };
 
 const fieldUi = {
-    root: 'min-h-[76px]',
-    label: 'text-primarytext dark:text-primarytext',
+    label: 'mb-2 block font-medium text-primarytext dark:text-primarytext',
 };
 
 const inputUi = {
-    base: 'h-8 rounded-md bg-white text-primarytext ring-1 ring-borderstrokeline placeholder:text-secondarytext focus-visible:ring-2 focus-visible:ring-primary-pink dark:bg-white dark:text-primarytext dark:ring-borderstrokeline dark:placeholder:text-secondarytext',
+    base: 'h-12 rounded-md bg-white px-4 py-3 text-base text-primarytext ring-1 ring-borderstrokeline placeholder:text-secondarytext outline-none transition focus-visible:ring-2 focus-visible:ring-primary-pink dark:bg-white dark:text-primarytext dark:ring-borderstrokeline dark:placeholder:text-secondarytext',
 };
 
 watch(
@@ -89,16 +87,42 @@ function onSubmit() {
         <template #content>
             <div
                 v-if="props.product"
-                class="relative min-h-[590px] rounded-2xl bg-white px-8 pt-8 pb-12 shadow-xl"
+                class="relative rounded-2xl border border-borderstrokeline bg-white p-8 shadow-xl"
             >
-                <UForm :state="state" class="space-y-8" @submit="onSubmit">
-                    <div class="grid grid-cols-[150px_1fr] gap-x-5 gap-y-4">
-                        <div class="space-y-4 self-end">
+                <UButton
+                    icon="i-lucide-x"
+                    color="neutral"
+                    variant="ghost"
+                    aria-label="Sluiten"
+                    class="absolute top-5 right-5 z-10 h-9 w-9 justify-center rounded-full bg-primary-pink p-0 text-white transition-all duration-200 hover:bg-primaryhover-pink hover:text-white active:bg-primary-pink"
+                    @click="modalOpen = false"
+                />
+
+                <UForm :state="state" class="space-y-5" @submit="onSubmit">
+                    <div class="grid gap-5 sm:grid-cols-[1fr_150px]">
+                        <div class="space-y-5">
+                            <section>
+                                <p
+                                    class="text-sm font-semibold tracking-widest text-primary-pink uppercase"
+                                >
+                                    Bestel product
+                                </p>
+
+                                <h3
+                                    class="font-timesnewroman mt-3 text-3xl font-bold text-primarytext"
+                                >
+                                    {{ props.product.title }}
+                                </h3>
+
+                                <p class="mt-4 text-secondarytext">
+                                    {{ props.product.price }}
+                                </p>
+                            </section>
+
                             <UFormField
                                 label="E-mail"
                                 name="email"
                                 required
-                                size="sm"
                                 :ui="fieldUi"
                             >
                                 <UInput
@@ -116,7 +140,6 @@ function onSubmit() {
                                 label="Naam"
                                 name="name"
                                 required
-                                size="sm"
                                 :ui="fieldUi"
                             >
                                 <UInput
@@ -133,83 +156,69 @@ function onSubmit() {
                         <ProductenHaakHartImageTile
                             :image="props.product.image"
                             :alt="props.product.title"
-                            class="h-72 w-full"
-                        >
-                            <UButton
-                                icon="i-lucide-x"
-                                color="neutral"
-                                variant="ghost"
-                                aria-label="Sluiten"
-                                class="absolute top-5 right-5 h-9 w-9 justify-center rounded-full bg-primary-pink p-0 text-white transition-all duration-200 hover:bg-primaryhover-pink hover:text-white active:bg-primary-pink"
-                                @click="modalOpen = false"
-                            />
-                        </ProductenHaakHartImageTile>
-
-                        <div class="col-span-2 space-y-4">
-                            <UFormField
-                                label="Postcode"
-                                name="postcode"
-                                required
-                                size="sm"
-                                :ui="fieldUi"
-                            >
-                                <UInput
-                                    v-model="state.postcode"
-                                    placeholder="1111 AA.."
-                                    color="neutral"
-                                    variant="outline"
-                                    class="w-full"
-                                    :ui="inputUi"
-                                />
-                            </UFormField>
-
-                            <UFormField
-                                label="Huisnummer"
-                                name="houseNumber"
-                                required
-                                size="sm"
-                                :ui="fieldUi"
-                            >
-                                <UInput
-                                    v-model="state.houseNumber"
-                                    placeholder="11"
-                                    color="neutral"
-                                    variant="outline"
-                                    class="w-full"
-                                    :ui="inputUi"
-                                />
-                            </UFormField>
-
-                            <UFormField
-                                label="Telefoonnummer"
-                                name="phone"
-                                required
-                                size="sm"
-                                :ui="fieldUi"
-                            >
-                                <UInput
-                                    v-model="state.phone"
-                                    type="tel"
-                                    placeholder="062993456"
-                                    color="neutral"
-                                    variant="outline"
-                                    class="w-full"
-                                    :ui="inputUi"
-                                />
-                            </UFormField>
-                        </div>
-                    </div>
-
-                    <div class="flex justify-center pt-1">
-                        <UButton
-                            type="submit"
-                            label="Bestellen"
-                            size="lg"
-                            color="neutral"
-                            variant="ghost"
-                            class="rounded-xl bg-primary-pink px-7 font-semibold text-white shadow-none transition-all duration-200 hover:bg-primaryhover-pink hover:text-white active:bg-primary-pink"
+                            class=" w-full rounded-2xl shadow-md"
                         />
                     </div>
+
+                    <div class="grid gap-4 md:grid-cols-2">
+                        <UFormField
+                            label="Postcode"
+                            name="postcode"
+                            required
+                            :ui="fieldUi"
+                        >
+                            <UInput
+                                v-model="state.postcode"
+                                placeholder="1111 AA.."
+                                color="neutral"
+                                variant="outline"
+                                class="w-full"
+                                :ui="inputUi"
+                            />
+                        </UFormField>
+
+                        <UFormField
+                            label="Huisnummer"
+                            name="houseNumber"
+                            required
+                            :ui="fieldUi"
+                        >
+                            <UInput
+                                v-model="state.houseNumber"
+                                placeholder="11"
+                                color="neutral"
+                                variant="outline"
+                                class="w-full"
+                                :ui="inputUi"
+                            />
+                        </UFormField>
+                    </div>
+
+                    <UFormField
+                        label="Telefoonnummer"
+                        name="phone"
+                        required
+                        :ui="fieldUi"
+                    >
+                        <UInput
+                            v-model="state.phone"
+                            type="tel"
+                            placeholder="062993456"
+                            color="neutral"
+                            variant="outline"
+                            class="w-full"
+                            :ui="inputUi"
+                        />
+                    </UFormField>
+
+                    <UButton
+                        type="submit"
+                        label="Bestellen"
+                        icon="i-lucide-shopping-cart"
+                        color="neutral"
+                        variant="ghost"
+                        class="mt-1 w-full justify-center gap-2 rounded-md bg-primary-pink px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-primaryhover-pink hover:text-white active:bg-primary-pink"
+                    />
                 </UForm>
             </div>
         </template>

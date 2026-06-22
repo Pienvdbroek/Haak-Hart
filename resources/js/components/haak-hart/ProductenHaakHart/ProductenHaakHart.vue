@@ -8,7 +8,7 @@ defineOptions({
 </script>
 
 <template>
-    <UContainer class="max-w-7xl py-8">
+    <UContainer class="max-w-7xl">
         <ProductenHaakHartContents />
     </UContainer>
 </template>

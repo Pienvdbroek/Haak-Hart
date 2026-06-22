@@ -43,9 +43,13 @@ const steps = [
             >
                 <div class="flex items-center gap-5">
                     <div
-                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-menuhover-pink text-xl font-semibold text-primary-pink"
+                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-menuhover-pink"
                     >
-                        {{ step.number }}
+                        <span
+                            class="font-timesnewroman text-4xl leading-none font-bold text-primarytext"
+                        >
+                            {{ step.number }}
+                        </span>
                     </div>
 
                     <div>

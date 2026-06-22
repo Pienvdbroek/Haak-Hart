@@ -22,15 +22,15 @@ const state = reactive<DonationForm>({
 });
 
 const fieldUi = {
-    label: 'text-xs text-primarytext dark:text-primarytext sm:text-sm',
+    label: 'mb-2 block font-medium text-primarytext dark:text-primarytext',
 };
 
 const inputUi = {
-    base: 'h-7 rounded-md bg-white text-xs text-primarytext ring-1 ring-borderstrokeline placeholder:text-secondarytext focus-visible:ring-2 focus-visible:ring-primary-pink dark:bg-white dark:text-primarytext dark:ring-borderstrokeline dark:placeholder:text-secondarytext sm:h-8 sm:text-sm',
+    base: 'h-12 rounded-md bg-white px-4 py-3 text-base text-primarytext ring-1 ring-borderstrokeline placeholder:text-secondarytext outline-none transition focus-visible:ring-2 focus-visible:ring-primary-pink dark:bg-white dark:text-primarytext dark:ring-borderstrokeline dark:placeholder:text-secondarytext',
 };
 
 const textareaUi = {
-    base: 'min-h-24 rounded-md bg-white text-xs text-primarytext ring-1 ring-borderstrokeline placeholder:text-secondarytext focus-visible:ring-2 focus-visible:ring-primary-pink dark:bg-white dark:text-primarytext dark:ring-borderstrokeline dark:placeholder:text-secondarytext sm:min-h-28 sm:text-sm',
+    base: 'min-h-36 rounded-md bg-white px-4 py-3 text-base text-primarytext ring-1 ring-borderstrokeline placeholder:text-secondarytext outline-none transition focus-visible:ring-2 focus-visible:ring-primary-pink dark:bg-white dark:text-primarytext dark:ring-borderstrokeline dark:placeholder:text-secondarytext',
 };
 
 function onSubmit() {
@@ -40,12 +40,14 @@ function onSubmit() {
 
 <template>
     <DonatieHaakHartDonationBox>
-        <UForm :state="state" class="space-y-3 sm:space-y-4" @submit="onSubmit">
-            <h1 class="font-timesnewroman text-2xl font-bold text-primarytext sm:text-3xl">
+        <UForm :state="state" class="space-y-5" @submit="onSubmit">
+            <h1
+                class="font-timesnewroman mb-8 text-3xl font-bold text-primarytext"
+            >
                 Stuur ons een bericht
             </h1>
 
-            <div class="grid grid-cols-2 gap-3 sm:gap-4">
+            <div class="grid gap-4 md:grid-cols-2">
                 <UFormField label="Naam" name="name" required :ui="fieldUi">
                     <UInput
                         v-model="state.name"
@@ -70,32 +72,39 @@ function onSubmit() {
                 </UFormField>
             </div>
 
-            <UFormField label="Postcode" name="postcode" required :ui="fieldUi">
-                <UInput
-                    v-model="state.postcode"
-                    placeholder="1111 AA.."
-                    color="neutral"
-                    variant="outline"
-                    class="w-full"
-                    :ui="inputUi"
-                />
-            </UFormField>
+            <div class="grid gap-4 md:grid-cols-2">
+                <UFormField
+                    label="Postcode"
+                    name="postcode"
+                    required
+                    :ui="fieldUi"
+                >
+                    <UInput
+                        v-model="state.postcode"
+                        placeholder="1111 AA.."
+                        color="neutral"
+                        variant="outline"
+                        class="w-full"
+                        :ui="inputUi"
+                    />
+                </UFormField>
 
-            <UFormField
-                label="Huisnummer"
-                name="houseNumber"
-                required
-                :ui="fieldUi"
-            >
-                <UInput
-                    v-model="state.houseNumber"
-                    placeholder="11"
-                    color="neutral"
-                    variant="outline"
-                    class="w-full"
-                    :ui="inputUi"
-                />
-            </UFormField>
+                <UFormField
+                    label="Huisnummer"
+                    name="houseNumber"
+                    required
+                    :ui="fieldUi"
+                >
+                    <UInput
+                        v-model="state.houseNumber"
+                        placeholder="11"
+                        color="neutral"
+                        variant="outline"
+                        class="w-full"
+                        :ui="inputUi"
+                    />
+                </UFormField>
+            </div>
 
             <UFormField
                 label="Telefoonnummer"
@@ -128,9 +137,10 @@ function onSubmit() {
             <UButton
                 type="submit"
                 label="Verstuur bericht"
+                icon="i-lucide-send"
                 color="neutral"
                 variant="ghost"
-                class="mt-4 w-full justify-center rounded-xl bg-primary-pink py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-primaryhover-pink hover:text-white active:bg-primary-pink sm:mt-5 sm:py-3"
+                class="mt-1 w-full justify-center gap-2 rounded-md bg-primary-pink px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-primaryhover-pink hover:text-white active:bg-primary-pink"
             />
         </UForm>
     </DonatieHaakHartDonationBox>

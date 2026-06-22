@@ -93,29 +93,27 @@ function openProductModal(product: Product) {
 </script>
 
 <template>
-    <section class="space-y-10 py-10">
-        <div class="mx-auto max-w-3xl space-y-4 text-center">
+    <div class="mx-auto max-w-7xl py-16">
+        <section class="text-center">
             <p
-                class="text-sm font-medium tracking-[0.25em] text-primary-pink uppercase"
+                class="text-sm font-semibold tracking-widest text-primary-pink uppercase"
             >
                 Eigen productie
             </p>
 
             <h1
-                class="font-timesnewroman text-5xl font-bold text-primarytext sm:text-6xl"
+                class="font-timesnewroman mt-3 text-5xl font-bold text-primarytext"
             >
                 Onze Producten
             </h1>
 
-            <p
-                class="mx-auto max-w-xl text-lg leading-relaxed text-secondarytext"
-            >
+            <p class="mx-auto mt-4 max-w-2xl text-secondarytext">
                 Elk product is met de hand gehaakt door onze vrijwilligers. De
                 opbrengst gaat naar het helpen van mensen in nood.
             </p>
-        </div>
+        </section>
 
-        <div class="mx-auto flex max-w-4xl flex-wrap justify-center gap-4">
+        <div class="mx-auto mt-10 flex max-w-4xl flex-wrap justify-center gap-4">
             <UButton
                 v-for="category in categories"
                 :key="category"
@@ -133,7 +131,7 @@ function openProductModal(product: Product) {
             />
         </div>
 
-        <UPageGrid class="lg:grid-cols-4">
+        <UPageGrid class="mt-10 lg:grid-cols-4">
             <UPageCard
                 v-for="product in filteredProducts"
                 :key="product.title"
@@ -154,6 +152,11 @@ function openProductModal(product: Product) {
                     />
 
                     <UBadge
+                        :label="product.title"
+                        class="font-timesnewroman absolute bottom-16 left-5 h-9 w-fit max-w-[calc(100%-2.5rem)] justify-start rounded-full bg-white px-4 text-left text-base font-bold text-primarytext shadow-sm"
+                    />
+
+                    <UBadge
                         :label="product.price"
                         class="font-timesnewroman absolute right-5 bottom-5 h-9 w-20 justify-center rounded-xl bg-primary-pink px-0 text-sm font-semibold text-white"
                     />
@@ -165,5 +168,5 @@ function openProductModal(product: Product) {
             v-model:open="modalOpen"
             :product="selectedProduct"
         />
-    </section>
+    </div>
 </template>

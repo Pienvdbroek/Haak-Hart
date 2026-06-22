@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { router, usePage } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 
 type NavigationItem = {
     key: string;
@@ -9,12 +9,24 @@ type NavigationItem = {
     href: string;
 };
 
+type FakeUser = {
+    name: string;
+    email: string;
+    initials: string;
+};
+
 const page = usePage();
 const mobileOpen = ref(false);
+const fakeLoggedIn = ref(false);
 
-const isLoggedIn = computed(() => {
-    return !!page.props.auth?.user;
-});
+const fakeAuthKey = 'haakHartFakeLoggedIn';
+const authChangedEvent = 'haak-hart-auth-changed';
+
+const fakeUser: FakeUser = {
+    name: 'Haak & Hart gebruiker',
+    email: 'gebruiker@haakenhart.nl',
+    initials: 'HH',
+};
 
 const navigation: NavigationItem[] = [
     {
@@ -43,6 +55,18 @@ const navigation: NavigationItem[] = [
     },
 ];
 
+const isLoggedIn = computed(() => {
+    return fakeLoggedIn.value || !!page.props.auth?.user;
+});
+
+const currentUser = computed(() => {
+    if (!isLoggedIn.value) {
+        return null;
+    }
+
+    return fakeUser;
+});
+
 const currentPath = computed(() => {
     return (page.url || '').split('?')[0].replace(/\/$/, '') || '/';
 });
@@ -51,17 +75,46 @@ function isActive(item: NavigationItem) {
     return currentPath.value === item.href;
 }
 
+function syncFakeAuth() {
+    fakeLoggedIn.value = window.localStorage.getItem(fakeAuthKey) === 'true';
+}
+
+function setFakeLoggedIn(value: boolean) {
+    fakeLoggedIn.value = value;
+
+    if (value) {
+        window.localStorage.setItem(fakeAuthKey, 'true');
+    } else {
+        window.localStorage.removeItem(fakeAuthKey);
+    }
+
+    window.dispatchEvent(new Event(authChangedEvent));
+}
+
 function authAction() {
     mobileOpen.value = false;
 
     if (isLoggedIn.value) {
-        router.post('/logout');
+        setFakeLoggedIn(false);
+        router.get('/home-haak-hart');
 
         return;
     }
 
     router.get('/login');
 }
+
+onMounted(() => {
+    syncFakeAuth();
+
+    window.addEventListener('storage', syncFakeAuth);
+    window.addEventListener(authChangedEvent, syncFakeAuth);
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener('storage', syncFakeAuth);
+    window.removeEventListener(authChangedEvent, syncFakeAuth);
+});
 </script>
 
 <template>
@@ -72,24 +125,30 @@ function authAction() {
 
         <header class="relative border-b-1 border-borderstrokeline bg-white">
             <div class="mx-auto flex h-20 max-w-7xl items-center px-8">
-                <ULink to="/home-haak-hart" class="flex items-center gap-4">
+                <ULink
+                    to="/home-haak-hart"
+                    class="flex shrink-0 items-center gap-4"
+                >
                     <img
                         src="/images/LogoHaakHart.svg"
                         alt="Haak & Hart"
-                        class="h-16 w-16"
+                        class="h-16 w-16 shrink-0"
                     />
 
-                    <div>
-                        <h1 class="text-2xl font-semibold text-primarytext font-timesnewroman">
+                    <div class="shrink-0">
+                        <h1
+                            class="font-timesnewroman whitespace-nowrap text-2xl font-semibold text-primarytext"
+                        >
                             Haak & Hart
                         </h1>
-                        <p class="text-sm text-secondarytext">
+
+                        <p class="whitespace-nowrap text-sm text-secondarytext">
                             Met liefde gehaakt
                         </p>
                     </div>
                 </ULink>
 
-                <div class="relative mx-auto hidden lg:block">
+                <div class="relative mx-auto hidden xl:block">
                     <nav class="relative flex items-center">
                         <div class="relative flex items-center gap-2">
                             <ULink
@@ -109,19 +168,49 @@ function authAction() {
                     </nav>
                 </div>
 
+                <div
+                    v-if="currentUser"
+                    class="mr-4 hidden items-center gap-3 xl:flex"
+                >
+                    <div
+                        class="font-timesnewroman flex h-10 w-10 items-center justify-center rounded-md bg-menuhover-pink text-lg font-bold text-primarytext"
+                    >
+                        {{ currentUser.initials }}
+                    </div>
+
+                    <div class="leading-tight">
+                        <p
+                            class="font-timesnewroman whitespace-nowrap text-sm font-semibold text-primarytext"
+                        >
+                            {{ currentUser.name }}
+                        </p>
+
+                        <p class="whitespace-nowrap text-xs text-secondarytext">
+                            {{ currentUser.email }}
+                        </p>
+                    </div>
+                </div>
+
                 <button
                     type="button"
-                    class="hidden items-center gap-2 rounded-md bg-primary-pink px-6 py-2 text-lg font-semibold text-white shadow-md hover:bg-primaryhover-pink lg:flex"
+                    class="hidden items-center gap-2 rounded-md bg-primary-pink px-6 py-2 text-lg font-semibold text-white shadow-md transition hover:bg-primaryhover-pink xl:flex"
                     @click="authAction"
                 >
-                    <UIcon name="i-lucide-heart" class="h-5 w-5" />
+                    <UIcon
+                        :name="
+                            isLoggedIn
+                                ? 'i-heroicons-heart-solid'
+                                : 'i-lucide-heart'
+                        "
+                        class="h-5 w-5 text-white"
+                    />
+
                     <span>{{ isLoggedIn ? 'Uitloggen' : 'Aanmelden' }}</span>
                 </button>
 
-                <!-- Mobile-->
                 <button
                     type="button"
-                    class="ml-auto flex items-center justify-center lg:hidden"
+                    class="ml-auto flex items-center justify-center xl:hidden"
                     @click="mobileOpen = !mobileOpen"
                 >
                     <UIcon
@@ -133,36 +222,69 @@ function authAction() {
 
             <div
                 v-if="mobileOpen"
-                class="border-t border-borderstrokeline bg-white shadow-sm lg:hidden"
+                class="border-t border-borderstrokeline bg-white shadow-sm xl:hidden"
             >
                 <nav class="flex flex-col gap-2 p-4">
                     <ULink
                         v-for="item in navigation"
                         :key="item.key"
                         :to="item.href"
-                        @click="mobileOpen = false"
                         :class="[
                             'rounded-md px-4 py-3 font-semibold text-primarytext transition-all',
                             isActive(item)
                                 ? 'bg-primary-pink text-white hover:text-white'
                                 : 'hover:bg-menuhover-pink hover:text-primarytext',
                         ]"
+                        @click="mobileOpen = false"
                     >
                         {{ item.label }}
                     </ULink>
 
+                    <div
+                        v-if="currentUser"
+                        class="mt-2 flex items-center gap-3 rounded-xl bg-backgroundfooter-pink p-4"
+                    >
+                        <div
+                            class="font-timesnewroman flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-menuhover-pink text-lg font-bold text-primarytext"
+                        >
+                            {{ currentUser.initials }}
+                        </div>
+
+                        <div class="min-w-0 leading-tight">
+                            <p
+                                class="font-timesnewroman font-semibold text-primarytext"
+                            >
+                                {{ currentUser.name }}
+                            </p>
+
+                            <p class="text-sm text-secondarytext">
+                                {{ currentUser.email }}
+                            </p>
+                        </div>
+                    </div>
+
                     <button
                         type="button"
-                        class="mt-2 flex items-center justify-center gap-2 rounded-md bg-primary-pink px-4 py-3 font-semibold text-white hover:bg-primaryhover-pink"
+                        class="mt-2 flex items-center justify-center gap-2 rounded-md bg-primary-pink px-4 py-3 font-semibold text-white transition hover:bg-primaryhover-pink"
                         @click="authAction"
                     >
-                        <UIcon name="i-lucide-heart" class="h-5 w-5" />
-                        <span>{{
-                            isLoggedIn ? 'Uitloggen' : 'Aanmelden'
-                        }}</span>
+                        <UIcon
+                            :name="
+                                isLoggedIn
+                                    ? 'i-heroicons-heart-solid'
+                                    : 'i-lucide-heart'
+                            "
+                            class="h-5 w-5 text-white"
+                        />
+
+                        <span>
+                            {{ isLoggedIn ? 'Uitloggen' : 'Aanmelden' }}
+                        </span>
                     </button>
                 </nav>
             </div>
         </header>
+
+        <slot />
     </div>
 </template>
