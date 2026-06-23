@@ -6,29 +6,38 @@
             w-full
             max-w-[560px]
             overflow-visible
-            pb-[340px]
+            pb-16
 
-            max-[360px]:pb-[390px]
+            [--donatiebox-overlap:-42%]
+            [--donatiebox-width:116%]
 
-            min-[380px]:pb-[350px]
+
+            min-[380px]:[--donatiebox-overlap:-20%]
+            min-[380px]:[--donatiebox-width:116%]
 
             min-[480px]:max-w-[620px]
-            min-[480px]:pb-[310px]
+            min-[480px]:[--donatiebox-overlap:-20%]
+            min-[480px]:[--donatiebox-width:105%]
 
             sm:max-w-[680px]
-            sm:pb-[210px]
+            sm:[--donatiebox-overlap:-10%]
+            sm:[--donatiebox-width:95%]
 
             md:max-w-[700px]
-            md:pb-[150px]
+            md:[--donatiebox-overlap:-40%]
+            md:[--donatiebox-width:93%]
 
             lg:max-w-[720px]
-            lg:pb-[132px]
+            lg:[--donatiebox-overlap:-15%]
+            lg:[--donatiebox-width:90%]
 
             xl:max-w-[720px]
-            xl:pb-[132px]
+            xl:[--donatiebox-overlap:-35%]
+            xl:[--donatiebox-width:90%]
 
             2xl:max-w-[720px]
-            2xl:pb-[132px]
+            2xl:[--donatiebox-overlap:-35%]
+            2xl:[--donatiebox-width:90%]
         "
     >
         <div
@@ -228,43 +237,20 @@
             >
                 <slot />
             </div>
-
-            <img
-                src="/donatiebox.svg"
-                alt="Donatiebox"
-                class="
-                    absolute
-                    right-0
-                    bottom-[-24%]
-                    left-0
-                    z-10
-                    mx-auto
-                    w-[116%]
-
-                    max-[360px]:bottom-[-27%]
-
-                    min-[380px]:bottom-[-24%]
-                    min-[380px]:w-[116%]
-
-                    min-[480px]:bottom-[-20%]
-                    min-[480px]:w-[105%]
-
-                    sm:bottom-[-20%]
-                    sm:w-[95%]
-
-                    md:bottom-[-15%]
-                    md:w-[93%]
-
-                    lg:bottom-[-15%]
-                    lg:w-[90%]
-
-                    xl:bottom-[-15%]
-                    xl:w-[90%]
-
-                    2xl:bottom-[-15%]
-                    2xl:w-[90%]
-                "
-            />
         </div>
+
+        <img
+            src="/donatiebox.svg"
+            alt="Donatiebox"
+            class="
+                pointer-events-none
+                relative
+                z-10
+                mx-auto
+                block
+                w-[var(--donatiebox-width)]
+                mt-[var(--donatiebox-overlap)]
+            "
+        />
     </section>
 </template>

@@ -8,7 +8,7 @@ import DonatieHaakHartSteps from '@/components/haak-hart/DonatieHaakHart/Donatie
         <UPageGrid
             class="items-center gap-14 sm:grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]"
         >
-            <DonatieHaakHartSteps class="order-1 lg:order-2" />
+            <DonatieHaakHartSteps class="order-1 lg:order-2 lg:-translate-y-16" />
 
             <DonatieHaakHartForm class="order-2 lg:order-1" />
         </UPageGrid>

@@ -46,7 +46,8 @@ const state = reactive<CheckoutForm>({
 });
 
 const modalUi = {
-    content: 'w-[min(94vw,520px)] max-w-none bg-transparent p-0 shadow-none ring-0',
+    content:
+        'w-[min(94vw,520px)] max-w-none max-h-[calc(100dvh-2rem)] overflow-y-auto overscroll-contain bg-transparent p-0 shadow-none ring-0',
 };
 
 const fieldUi = {
@@ -87,7 +88,7 @@ function onSubmit() {
         <template #content>
             <div
                 v-if="props.product"
-                class="relative rounded-2xl border border-borderstrokeline bg-backgroundprimary p-8 shadow-xl"
+                class="relative rounded-2xl border border-borderstrokeline bg-backgroundprimary p-5 shadow-xl sm:p-8"
             >
                 <UButton
                     icon="i-lucide-x"
@@ -98,7 +99,11 @@ function onSubmit() {
                     @click="modalOpen = false"
                 />
 
-                <UForm :state="state" class="space-y-5" @submit="onSubmit">
+                <UForm
+                    :state="state"
+                    class="space-y-4 sm:space-y-5"
+                    @submit="onSubmit"
+                >
                     <div class="grid gap-5 sm:grid-cols-[1fr_150px]">
                         <div class="space-y-5">
                             <section>
@@ -109,7 +114,7 @@ function onSubmit() {
                                 </p>
 
                                 <h3
-                                    class="font-timesnewroman mt-3 text-3xl font-bold text-primarytext"
+                                    class="font-timesnewroman mt-3 pr-12 text-3xl font-bold text-primarytext"
                                 >
                                     {{ props.product.title }}
                                 </h3>
@@ -156,7 +161,7 @@ function onSubmit() {
                         <ProductenHaakHartImageTile
                             :image="props.product.image"
                             :alt="props.product.title"
-                            class="w-full rounded-2xl shadow-md"
+                            class="aspect-[4/5] w-full rounded-2xl shadow-md sm:aspect-auto sm:h-full"
                         />
                     </div>
 
